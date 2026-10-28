@@ -1,0 +1,379 @@
+/* ==========================================================================
+   Design System & Global Styles
+   중앙 집중형 고시인성 계산기 & 하단 확장 환율 인터페이스
+   ========================================================================== */
+
+:root {
+  /* Light Theme (Default) - 밝고 부드러우며 눈이 편안한 고대비 테마 */
+  --bg-app: #F4F7FB;
+  --bg-surface: #FFFFFF;
+  --bg-surface-secondary: #EBF1F7;
+  --bg-surface-tertiary: #DEE7F0;
+  --bg-card-hover: #F8FAFC;
+
+  /* Typography Colors - 고시인성 보장 */
+  --text-primary: #0F172A;      /* 선명하고 깊은 슬레이트 블랙 */
+  --text-secondary: #334155;    /* 뚜렷한 서브 텍스트 */
+  --text-muted: #64748B;        /* 보조 설명용 */
+  --text-inverse: #FFFFFF;
+
+  /* Brand & Accent Colors */
+  --primary: #2563EB;           /* 신뢰감 있는 코발트 블루 */
+  --primary-hover: #1D4ED8;
+  --primary-light: #EFF6FF;
+  --primary-border: #BFDBFE;
+
+  /* Transaction Badges & Status */
+  --tag-buy-bg: #FEF2F2;
+  --tag-buy-text: #DC2626;
+  --tag-buy-border: #FECACA;
+
+  --tag-sell-bg: #EFF6FF;
+  --tag-sell-text: #2563EB;
+  --tag-sell-border: #BFDBFE;
+
+  --tag-wire-bg: #F0FDF4;
+  --tag-wire-text: #16A34A;
+  --tag-wire-border: #BBF7D0;
+
+  --tag-recv-bg: #FAF5FF;
+  --tag-recv-text: #9333EA;
+  --tag-recv-border: #E9D5FF;
+
+  --color-positive: #DC2626;    /* 한국 금융 기준 환율 상승은 레드 */
+  --color-negative: #2563EB;    /* 환율 하락은 블루 */
+  --color-neutral: #64748B;
+
+  /* Border & Shadows */
+  --border-subtle: #E2E8F0;
+  --border-focus: #2563EB;
+  --border-strong: #CBD5E1;
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08), 0 2px 4px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 10px 25px -3px rgba(15, 23, 42, 0.1), 0 4px 6px -4px rgba(15, 23, 42, 0.05);
+  --shadow-xl: 0 20px 30px -10px rgba(15, 23, 42, 0.12);
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-accordion: 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Dark Theme Variables */
+body.dark-theme {
+  --bg-app: #0B1120;
+  --bg-surface: #1E293B;
+  --bg-surface-secondary: #0F172A;
+  --bg-surface-tertiary: #334155;
+  --bg-card-hover: #283548;
+
+  --text-primary: #F8FAFC;
+  --text-secondary: #E2E8F0;
+  --text-muted: #94A3B8;
+  --text-inverse: #0F172A;
+
+  --primary: #3B82F6;
+  --primary-hover: #60A5FA;
+  --primary-light: #1E3A8A;
+  --primary-border: #2563EB;
+
+  --tag-buy-bg: #450A0A;
+  --tag-buy-text: #F87171;
+  --tag-buy-border: #7F1D1D;
+
+  --tag-sell-bg: #172554;
+  --tag-sell-text: #60A5FA;
+  --tag-sell-border: #1E40AF;
+
+  --tag-wire-bg: #052E16;
+  --tag-wire-text: #4ADE80;
+  --tag-wire-border: #14532D;
+
+  --tag-recv-bg: #3B0764;
+  --tag-recv-text: #C084FC;
+  --tag-recv-border: #581C87;
+
+  --color-positive: #F87171;
+  --color-negative: #60A5FA;
+
+  --border-subtle: #334155;
+  --border-strong: #475569;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.6);
+  --shadow-xl: 0 20px 30px rgba(0, 0, 0, 0.7);
+}
+
+/* Base Reset & Box Sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Pretendard', 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* App Header */
+.app-header {
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+  padding: 0.85rem 1.5rem;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand-area {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.brand-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+}
+
+.brand-icon i {
+  width: 24px;
+  height: 24px;
+}
+
+.brand-text h1 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.brand-subtitle {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.rate-status-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-surface-secondary);
+  border: 1px solid var(--border-subtle);
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  transition: all var(--transition-normal);
+}
+
+.rate-status-badge.loading-pulse {
+  border-color: #3B82F6;
+  background: rgba(59, 130, 246, 0.1);
+  color: #2563EB;
+}
+
+body.dark-theme .rate-status-badge.loading-pulse {
+  background: rgba(59, 130, 246, 0.2);
+  color: #60A5FA;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status-dot.live {
+  background-color: #10B981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+  animation: pulse-dot 2s infinite;
+}
+
+.status-dot.offline {
+  background-color: #F59E0B;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.25);
+}
+
+@keyframes pulse-dot {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.rate-time {
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.icon-btn {
+  background: var(--bg-surface-secondary);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.icon-btn.spinning i,
+.icon-btn.spinning svg {
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* 환율 섹션 로딩 및 갱신 플래시 효과 */
+.rates-loading .mode-rate,
+.rates-loading .ticker-rate,
+.rates-loading .market-card-rate,
+.rates-loading #baseRateText {
+  opacity: 0.5;
+  filter: blur(1px);
+  transition: opacity 0.2s ease, filter 0.2s ease;
+}
+
+.rates-updated-flash .mode-rate,
+.rates-updated-flash .ticker-rate,
+.rates-updated-flash .market-card-rate,
+.rates-updated-flash #baseRateText {
+  animation: rateFlash 0.8s ease-out;
+}
+
+@keyframes rateFlash {
+  0% { color: #2563EB; transform: scale(1.04); }
+  50% { color: #10B981; }
+  100% { transform: scale(1); }
+}
+
+.icon-btn:hover {
+  background: var(--primary-light);
+  border-color: var(--primary-border);
+  color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.icon-btn i {
+  width: 18px;
+  height: 18px;
+}
+
+.theme-toggle .moon-icon {
+  display: none;
+}
+body.dark-theme .theme-toggle .sun-icon {
+  display: none;
+}
+body.dark-theme .theme-toggle .moon-icon {
+  display: block;
+}
+
+/* App Main Layout: 중앙 배치 & 하단 확장 구조 */
+.app-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+}
+
+/* Footer */
+.app-footer {
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-subtle);
+  padding: 1.5rem;
+  margin-top: 2rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.footer-container strong {
+  color: var(--text-secondary);
+}
+
+.copyright {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 768px) {
+  .app-main {
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .header-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
